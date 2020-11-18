@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+  <link href="main.css" rel="stylesheet">
+
+</head>
+<body>
+  <div id="content"></div>
+
+  <script id="requester-template" type="text/x-handlebars-template">
+    <div class="dados">
+		<figure>
+			{{#if photo}}
+			  <img src={{photo}} alt="{{name}}" srcset="">
+			{{/if}}
+			{{#else}}
+			  <img src='' alt="" srcset="">
+			{{/else}}
+		</figure>
+      <div>
+	       <strong><p>{{name}}</p></strong>
+        
+           <p>{{email}}</p>
+           <p>{{phone}}</p>
+      </div>
+	</div>
+	
+	<div class="status">
+		<small><strong class="n">N</strong> {{novo}}      </small>
+		<small><strong class="o">O</strong> {{open}}      </small>
+		<small><strong class="p">P</strong> {{pending}}      </small>
+		<small><strong class="h">H</strong> {{hold}}      </small>
+		<small><strong class="s">S</strong> {{solved}}      </small>
+		<small><strong class="c">C</strong> {{closed}}      </small>
+	</div>
+   
+    {{#if tags}}
+      <hr>
+	  <h2>Tags</h2>
+	  {{#each tags}}
+	     <p class="tag">{{this}}</p>
+	  {{/each}}
+	  
+	{{/if}}
+
+	{{#if nivel}}
+		<hr>
+		<h2>Nível do Cliente</h2>
+		<p>{{nivel}}</p>
+	{{/if}}
+
+	{{#if cpf}}
+	   <hr>
+	   <h2>CPF</h2>
+	   <p>{{cpf}}</p>
+	{{/if}}
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@4.3.3/dist/handlebars.min.js"></script>
+  <script src="main.js"></script>  
+</body>
+</html>
