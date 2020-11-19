@@ -4,11 +4,16 @@
   <meta charset="utf-8">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+
   <link href="main.css" rel="stylesheet">
 
 </head>
 <body>
-  <div id="content"></div>
+  <div id="content">
+	<div class="spinner-center" style="height: 90vh;">
+		<div class="spinner" style="height: 30px; width: 30px; "></div>
+	</div>
+  </div>
 
   <script id="requester-template" type="text/x-handlebars-template">
     <div class="dados">
@@ -16,9 +21,6 @@
 			{{#if photo}}
 			  <img src={{photo}} alt="{{name}}" srcset="">
 			{{/if}}
-			{{#else}}
-			  <img src='' alt="" srcset="">
-			{{/else}}
 		</figure>
       <div>
 	       <strong><p>{{name}}</p></strong>
@@ -28,14 +30,21 @@
       </div>
 	</div>
 	
-	<div class="status">
-		<small><strong class="n">N</strong> {{novo}}      </small>
-		<small><strong class="o">O</strong> {{open}}      </small>
-		<small><strong class="p">P</strong> {{pending}}      </small>
-		<small><strong class="h">H</strong> {{hold}}      </small>
-		<small><strong class="s">S</strong> {{solved}}      </small>
-		<small><strong class="c">C</strong> {{closed}}      </small>
-	</div>
+	{{#if loadingStatus}}
+		<div class="spinner-center">
+			<div class="spinner"></div>
+		</div>
+	{{else}}
+		<div class="status">
+			<small><strong class="n">N</strong> {{novo}}      </small>
+			<small><strong class="o">O</strong> {{open}}      </small>
+			<small><strong class="p">P</strong> {{pending}}      </small>
+			<small><strong class="h">H</strong> {{hold}}      </small>
+			<small><strong class="s">S</strong> {{solved}}      </small>
+			<small><strong class="c">C</strong> {{closed}}      </small>
+		</div>
+	{{/if}}
+	
    
     {{#if tags}}
       <hr>

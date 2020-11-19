@@ -8,9 +8,9 @@ client.get('ticket.requester.id').then(
   }
 );
 
-let user, i, aberto=0, novo=0, pending=0, hold=0, solved=0, closed=0;
+let user, i, aberto=0, novo=0, pending=0, hold=0, solved=0, closed=0, loadingStatus=true;
 
-function showInfo(data, novo, aberto, pending, hold, solved, closed) {
+function showInfo(data, novo, aberto, pending, hold, solved, closed, loadingStatus) {
     if(!data.user.photo){
       data.user.photo = ''
     }
@@ -27,7 +27,8 @@ function showInfo(data, novo, aberto, pending, hold, solved, closed) {
         'pending': pending,
         'hold': hold,
         'solved': solved,
-        'closed':closed
+        'closed':closed,
+        'loadingStatus': loadingStatus
     };
   
     let source = $("#requester-template").html();
@@ -47,7 +48,8 @@ async function requestUserInfo(client, id) {
   await client.request(settings).then(                        
     function(data) {
       console.log(data)
-        user = data
+      user = data
+      showInfo(user, novo, aberto, pending, hold, solved, closed, loadingStatus);
     },
   );
 
@@ -58,10 +60,12 @@ async function requestUserInfo(client, id) {
 
       if(tickets.next_page){
         moreTickets(tickets.next_page);
+      }else{
+        loadingStatus = false;
+        showInfo(user, novo, aberto, pending, hold, solved, closed, loadingStatus);
       }
     }
   );  
-
 }
 
 async function moreTickets(url){
@@ -73,6 +77,9 @@ async function moreTickets(url){
 
       if(tickets.next_page){
         moreTickets(tickets.next_page);
+      }else{
+        loadingStatus = false;
+        showInfo(user, novo, aberto, pending, hold, solved, closed, loadingStatus);
       }
     }
   );
@@ -99,7 +106,4 @@ function countStatus(tickets){
       closed++;
     }
   })
-
-  showInfo(user, novo, aberto, pending, hold, solved, closed);
-
 }
