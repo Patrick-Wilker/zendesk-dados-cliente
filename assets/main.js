@@ -8,6 +8,9 @@ client.get('ticket.requester.id').then(
   }
 );
 
+// console.log("Origin", client._origin);
+// console.log("App Guid", client._appGuid);
+
 let user, i, aberto=0, novo=0, pending=0, hold=0, solved=0, closed=0, loadingStatus=true;
 
 function showInfo(data, novo, aberto, pending, hold, solved, closed, loadingStatus) {
@@ -47,7 +50,7 @@ async function requestUserInfo(client, id) {
 
   await client.request(settings).then(                        
     function(data) {
-      console.log(data)
+      // console.log(data)
       user = data
       showInfo(user, novo, aberto, pending, hold, solved, closed, loadingStatus);
     },
@@ -55,7 +58,7 @@ async function requestUserInfo(client, id) {
 
   await client.request('/api/v2/users/' + id + '/tickets/requested.json').then(
     function(tickets) {
-      console.log(tickets)
+      // console.log(tickets)
       countStatus(tickets)
 
       if(tickets.next_page){
@@ -71,8 +74,8 @@ async function requestUserInfo(client, id) {
 async function moreTickets(url){
   await client.request(url).then(
     function(tickets){
-      console.log("Segundo Ticket")
-      console.log(tickets)
+      // console.log("Segundo Ticket")
+      // console.log(tickets)
       countStatus(tickets)
 
       if(tickets.next_page){

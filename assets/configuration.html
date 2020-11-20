@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+    <link href="main.css" rel="stylesheet">
+    <script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
+
+    <script>
+		//let client = ZAFClient.init();
+		//client.invoke('resize', { width: '100%', height: '320px' });
+            
+		function button(){
+			window.location.assign(`./iframe.html?origin=${client._origin}&app_guid=${client._appGuid}`)
+		}
+    </script>
+
+</head>
+<body>
+
+	<div id="configuration"></div>
+
+	<script id="custom" type="text/x-handlebars-template">
+		<div class="configuration">
+			<div class="cabecalho">
+				<p>Selecione os campos do usuário que gostaria de exibir permanentemente no aplicativo</p>
+
+				<a onclick="button()" id="config" class="config">
+					<i class="fa fa-times-circle" aria-hidden="true"></i>
+				</a>
+			</div>
+			
+			<div class="fields-list">
+				<div class="item-list">
+					<input name="tags" id="tags" type="checkbox">
+					<label for="tags">Tags</label>
+				</div>
+
+				<div class="item-list">
+					{{#if nivel}}
+						<input onclick="disableField(id, false)" name="nivel" id={{nivel_id}} type="checkbox" checked>
+					{{else}}
+						<input onclick="disableField(id, true)" name="nivel" id={{nivel_id}} type="checkbox">
+					{{/if}}
+					<label for="nivel">Nível de cliente</label>
+				</div>
+
+				<div class="item-list">
+					{{#if cpf}}
+						<input onclick="disableField(id, false)" name="cpf" id={{cpf_id}} type="checkbox" checked>
+					{{else}}
+						<input onclick="disableField(id, true)" name="cpf" id={{cpf_id}} type="checkbox">
+					{{/if}}
+					<label for="cpf">CPF</label>
+				</div>
+			</div>
+		</div>
+	</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@4.3.3/dist/handlebars.min.js"></script>
+  <script src="main.js"></script>  
+  <script src="custom-user-field.js"></script>
+</body>
+</html>

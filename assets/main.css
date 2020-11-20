@@ -3,16 +3,39 @@ body{
     padding:0;
 }
 
+a, a:hover{
+    text-decoration: none;
+    color: black;
+    cursor: default;
+}
+
+
 .dados{
     display: flex;
 }
+
 figure{
     margin-right: 12px;
 }
+
 img{
     border-radius: 50%;
     width: 40px;
 }
+
+.config{
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+
+.config i{
+    margin: 0 5px 0 0;
+    padding: 0;
+    cursor: pointer;
+}
+
 h2{
     font-size: 14px;
     font-weight: bold;
@@ -97,4 +120,31 @@ p{
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Estilização do configutation.html */
+.configuration .cabecalho{
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+.configuration .cabecalho a{
+    width: auto;
+}
+.configuration .cabecalho i{
+    margin: 0 5px 0 10px;
+}
+
+.fields-list{
+    font-size: 12px;
+}
+
+.item-list{
+    display: flex;
+    align-items: center;
+}
+.item-list label{
+    margin: 0 0 0 5px;
+    padding: 0;
 }
