@@ -122,6 +122,11 @@ p{
     }
 }
 
+
+.d-none{
+    display: none;
+}
+
 /* Estilização do configutation.html */
 .configuration .cabecalho{
     display: flex;

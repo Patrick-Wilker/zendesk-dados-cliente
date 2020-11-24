@@ -15,6 +15,46 @@
 		function button(){
 			window.location.assign(`./configuration.html?origin=${client._origin}&app_guid=${client._appGuid}`)
 		}
+
+		var query = location.search.slice(1);
+		var partes = query.split('&');
+		var data = {};
+		partes.forEach(function (parte) {
+			var chaveValor = parte.split('=');
+			var chave = chaveValor[0];
+			var valor = chaveValor[1];
+			data[chave] = valor;
+		});
+
+		console.log(data);
+		
+		setTimeout(()=>{
+			if(data.tags){
+				if(data.tags == 'true'){
+					element = document.getElementById('tagsEnable')
+					element.classList.remove('d-none')
+				}
+				else{
+					element = document.getElementById('tagsEnable')
+					element.classList.add('d-none')	
+				}		
+			}
+		}, 10000)
+		
+
+		// if(data.tags == 'true'){
+		// 	let element = document.getElementsByClassName("tagsEnable");
+		// 	let i;
+		// 	for (i = 0; i < element.length; i++) {
+		// 		element[i].classList.remove("d-none");
+		// 	}
+		// }else{
+		// 	let element = document.getElementsByClassName("tagsEnable");
+		// 	let i;
+		// 	for (i = 0; i < element.length; i++) {
+		// 		element[i].classList.add("d-none");
+		// 	}
+		// }
         
     </script>
 
@@ -60,14 +100,16 @@
 	{{/if}}
 	
    
-    {{#if tags}}
-      <hr>
-	  <h2>Tags</h2>
-	  {{#each tags}}
-	     <p class="tag">{{this}}</p>
-	  {{/each}}
-	  
-	{{/if}}
+	<div id="tagsEnable">
+		{{#if tags}}
+			<hr>
+			<h2>Tags</h2>
+			{{#each tags}}
+				<p class="tag">{{this}}</p>
+			{{/each}}
+		{{/if}}
+	</div>
+	
 
 	{{#if nivel}}
 		<hr>
@@ -82,11 +124,12 @@
 	{{/if}}
   </script>
 
+  
+
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
   <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@4.3.3/dist/handlebars.min.js"></script>
   <script src="main.js"></script>  
   <script src="custom-user-field.js"></script>
-
 </body>
 </html>

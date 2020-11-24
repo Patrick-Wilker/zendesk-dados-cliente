@@ -1,11 +1,12 @@
-let cpf, cpf_id, nivel, nivel_id;
+let cpf, cpf_id, nivel, nivel_id, tags = true;
 
-function showField(cpf, cpf_id, nivel, nivel_id){
+function showField(cpf, cpf_id, nivel, nivel_id, tags){
     let requester_data = {
         'nivel': nivel,
         'nivel_id': nivel_id,
         'cpf': cpf,
-        'cpf_id': cpf_id
+        'cpf_id': cpf_id,
+        'tags': tags
     };
   
     let source = $("#custom").html();
@@ -29,7 +30,7 @@ async function custom(){
 
             showField(cpf, cpf_id, nivel, nivel_id)
         }
-    );  
+    ); 
 }
 
 custom()
@@ -43,13 +44,17 @@ async function disableField(id, active){
                 active: active
             }
         }
-    }).then(
-        function(data) {
-            //console.log(data)
-        }
-    ); 
+    })
 }
 
+function disableTag(){
+    if(tags){
+        tags = false
+    }else{
+        tags = true
+
+    }
+}
 
 // async function disableTag(active){
 //     await client.request('/api/v2/user_fields.json').then(
